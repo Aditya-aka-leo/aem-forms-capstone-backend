@@ -4,7 +4,7 @@ export const config = {
     host: process.env.DB_HOST || 'localhost',
     port: parseInt(process.env.DB_PORT) || 3306,
     user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || '9053', // Add your MySQL password here
+    password: process.env.DB_PASSWORD || '9053',
     name: process.env.DB_NAME || 'aem_forms_db',
     connectionLimit: parseInt(process.env.DB_CONNECTION_LIMIT) || 10
   },

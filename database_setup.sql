@@ -5,14 +5,25 @@ COLLATE utf8mb4_unicode_ci;
 
 USE aem_forms_db;
 
-CREATE TABLE IF NOT EXISTS users (
+-- Drop the old users table if it exists
+DROP TABLE IF EXISTS users;
+
+-- Create updated users table matching the User model
+CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
+    transaction_ref_number VARCHAR(100) NOT NULL UNIQUE,
+    mobile_number VARCHAR(10) NOT NULL,
+    partner_name VARCHAR(100) NOT NULL,
+    identifier_name ENUM('PAN', 'DOB', 'CC4DIGIT', 'DC4DIGIT') NOT NULL,
+    product_name VARCHAR(255) NOT NULL,
+    date_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    preferred_lang VARCHAR(10) NOT NULL DEFAULT 'ENG',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    INDEX idx_username (username),
-    INDEX idx_email (email),
-    INDEX idx_created_at (created_at)
+    
+    INDEX idx_transaction_ref (transaction_ref_number),
+    INDEX idx_mobile_number (mobile_number),
+    INDEX idx_partner_name (partner_name),
+    INDEX idx_product_name (product_name),
+    INDEX idx_date_time (date_time)
 );
